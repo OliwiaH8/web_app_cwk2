@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1 class="text-center"><strong>Sign up</strong></h1>
+<p class="text-center">Already have an account? <a href="/login">Log in</a></p>
+
+<form class="text-center" action="" method="post" name="signupform">
+    {{ form.hidden_tag() }}
+    <div>
+        {{ form.firstname }}
+        {{ form.surname }}
+    </div>
+    <br>
+    <div>
+        {{ form.email }}
+        {{ form.password }}
+    </div>
+    <hr>
+    {{ form.submit }}
+</form>
+
+{% endblock %}

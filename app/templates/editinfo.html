@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1 class="text-center"><strong>Edit Info</strong></h1>
+
+<form class="text-center" action="" method="post" name="editform">
+    {{ form.hidden_tag() }}
+    <div>
+        {{ form.firstname(value=current_user.firstname) }}
+        {{ form.surname(value=current_user.surname) }}
+    </div>
+    <br>
+    <div>
+        {{ form.email(value=current_user.email) }}
+    </div>
+    <hr>
+    {{ form.submit }}
+</form>
+
+{% endblock %}

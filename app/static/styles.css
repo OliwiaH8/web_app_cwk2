@@ -1,0 +1,16 @@
+body {
+    width: 75%;
+    margin:0 auto;
+}
+
+.smallProduct img{
+    height: 92px;
+    margin: 10px 0;
+    cursor: pointer;
+    display: block;
+    opacity: 0.6;
+}
+
+.smallProduct img:hover{
+    opacity: 1;
+}

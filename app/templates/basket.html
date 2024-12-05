@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1 class="text-center mt-3 mb-4"><strong>{{ title }}</strong></h1>
+
+{% if title == 'Basket Empty' %}
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="text-center bg-dark text-white p-5">
+            <p>Your basket is empty!</p>
+            <p>Add items to cart to fill it up.</p>
+        </div>
+    </div>
+
+    {% else %}
+
+        <div class="d-flex">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <strong>Image</strong>
+                    </div>
+                    <div class="col-6">
+                        <strong>Name</strong>
+                    </div>
+                    <div class="col">
+                        <strong>Delete</strong>
+                    </div>
+                </div>
+                <hr>
+                {% for name in names %}
+                    <div class="row">
+                        <div class="col">
+                            <img src="{{ urls[loop.index0] }}" width="200" height="267">
+                        </div>
+                        <div class="col-6">
+                            {{ name }}
+                        </div>
+                        <div class="col">
+                            <a class="btn btn-danger text-white" href="{{ url_for('DeleteFromBasket', productId=items[loop.index0] )}}"><span>Delete</span></a>
+                        </div>
+                    </div>
+                    <hr>
+                {% endfor %}
+            </div>
+            <div>
+                <a href="/checkout" class="btn btn-info btn-lg" role="button" aria-pressed="true">Checkout</a>
+            </div>
+        </div>
+{% endif %}
+
+{% endblock %}

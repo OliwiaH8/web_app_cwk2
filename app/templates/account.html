@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1 class="text-center"><strong>Logged in as {{current_user.firstname}}</strong></h1>
+
+<div class="d-flex justify-content-center align-items-center">
+        <a class="btn btn-info" href="/editinfo">Edit Information</a>
+        <a class="btn btn-info ml-5" href="/changepassword">Change Password</a>
+        <a class="btn btn-danger ml-5" href="/logout">Logout</a>
+    </div>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1 class="text-center mt-3 mb-4"><strong>{{ title }}</strong></h1>
+
+<div id="details">
+    <div class="d-flex">
+        <div class="d-flex" id="pictures">
+            <div class="smallProduct">
+                {% for image in images %}
+                    <a class="image" id="{{ image }}"><img src="{{ image }}"></a>
+                {% endfor %}
+            </div>
+            <div class="imgContainer ml-3">
+                <img id="bigImg" src="{{ bigImg }}" width="500">
+            </div>
+        </div>
+        <div class="d-flex flex-column" id="text">
+            <div class="ml-5 mr-5" id="text">
+                <p>{{ product.description }}</p>
+                <hr>
+                <div class="d-flex">
+                    <p class="mt-2"><strong>£{{ product.final_price }}</strong></p>
+                    {% if product.stock_quantity > 0 %}
+                        <button type="button" class="btn btn-primary ml-4">
+                            <a class="basket" id="{{ product.id }}"><span id="basket">Add to Basket</span></a>
+                        </button>
+                        {% else %}
+                            <button type="button" class="btn btn-danger ml-4">
+                                Out of Stock
+                            </button>
+                    {% endif %}
+                    {% if current_user.is_authenticated %}
+                        <button type="button" class="btn btn-primary ml-4">
+                            <a class="text-white" href="{{ url_for('AddToWishlist', productId=product.id, customerId=current_user.id )}}">Add to wishlist</a>
+                        </button>
+                    {% endif %}
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

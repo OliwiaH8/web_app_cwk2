@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1 class="text-center"><strong>Search</strong></h1>
+
+<form class="text-center" action="" method="post" name="searchform">
+    {{ form.hidden_tag() }}
+    {{ form.search }}
+    {{ form.submit(class="btn btn-primary ml-2") }}
+</form>
+{% for lego in legos %}
+    {% if loop.index0 % 4 == 0 %}
+    </div>
+    <div class="d-flex justify-content-around flex-row bd-highlight mb-3">
+        <div class="p-2 bd-highlight">
+            <div class="text-center"><a href="{{ url_for('Details', productId=lego.id)}}"><img src="{{ main_urls[loop.index0] }}" width="200" height="267"></a></div>
+            <p class="text-center">{{ names_list[loop.index0] }}</p>
+        </div>
+    {% else %}
+        <div class="p-2 bd-highlight">
+            <div class="text-center"><a href="{{ url_for('Details', productId=lego.id)}}"><img src="{{ main_urls[loop.index0] }}" width="200" height="267"></a></div>
+            <p class="text-center">{{ names_list[loop.index0] }}</p>
+        </div>
+    {% endif %}
+{% endfor %}
+
+{% endblock %}

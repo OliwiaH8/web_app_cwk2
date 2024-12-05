@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='ajax_js.js') }}"></script>
+
+        {% if title %}
+            <title>{{ title }}</title>
+            {% else %}
+            <title>No title Specified</title>
+        {% endif %}
+    </head>
+    <body class="bg-light">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">Shop by: </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor1" aria-controls="navbarColor1" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">All<span class="sr-only">(current)</span></a>
+                    </li>
+                    <!--category dropdown-->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Category</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            {% for category in categories %}
+                                <a class="dropdown-item" href="{{ url_for('ShopBy', shopby=category)}}">{{ category }}</a>
+                            {% endfor %}
+                        </div>
+                    </li>
+                    <!--age dropdown-->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Age Range</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            {% for age in ages %}
+                                <a class="dropdown-item" href="{{ url_for('ShopBy', shopby=age)}}">{{ age }}</a>
+                            {% endfor %}
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/search">Search</a>
+                    </li>
+                </ul>
+                {% if current_user.is_authenticated %}
+                    <button type="button" class="btn btn-primary ml-2">
+                        <a class="text-white" href="/account">Hello, {{current_user.firstname}}</a>
+                    </button>
+                    <button type="button" class="btn btn-primary ml-2">
+                        <a class="text-white" href="/wishlist">Wishlist</a>
+                    </button>
+                    {% else %}
+                    <a href="/login" class="btn btn-primary ml-2" role="button" aria-pressed="true">Login</a>
+                {% endif %}
+                <a href="/basket" class="btn btn-primary ml-2" role="button" aria-pressed="true">
+                    <i class="bi bi-basket d-inline"></i>
+                    <p class="d-inline">Basket</p>
+                </a>
+            </div>
+        </nav>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-4"></div>
+                <div class="col-3">
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-success">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                </div>
+            </div>
+        </div>      
+        <div>
+            {% block content %}{% endblock %}
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    </body>
+</html>
